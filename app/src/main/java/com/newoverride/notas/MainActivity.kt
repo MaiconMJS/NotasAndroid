@@ -11,6 +11,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = HomeViewBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
-        //
     }
 }
