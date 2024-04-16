@@ -1,10 +1,11 @@
 package com.newoverride.notas.view
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.newoverride.notas.AddNote
 import com.newoverride.notas.Home
 import com.newoverride.notas.adapter.HomeAdapter
 import com.newoverride.notas.database.DependencyInjector
@@ -15,14 +16,9 @@ import com.newoverride.notas.presenter.HomePresenter
 class HomeView : AppCompatActivity(), Home.View {
 
     private var presenter: Home.Presenter? = null
+    private var binding: HomeViewBinding? = null
     private var dataList: MutableList<Nota>? = mutableListOf()
-
-    companion object {
-        @SuppressLint("StaticFieldLeak")
-        var adapter: HomeAdapter? = null
-        @SuppressLint("StaticFieldLeak")
-        var binding: HomeViewBinding? = null
-    }
+    private var adapter: HomeAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +28,15 @@ class HomeView : AppCompatActivity(), Home.View {
         // INICIANDO O PRESENTER!
         presenter = HomePresenter(this, DependencyInjector.homeRepository())
         presenter!!.data(dataList!!)
+
+        // ESCUTANDO BOTÕES E LIXEIRA!
+        with(binding) {
+            this?.btnAddNote?.setOnClickListener {
+                val intent = Intent(it.context, AddNote::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 
     override fun showDisplay(

@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Notas</string>
     <string name="total_de_notas">Total De Notas</string>
+    <string name="add_notas">Adicione uma Nota!</string>
+    <string name="titulo_new_nota">Digíte o Título</string>
 </resources>

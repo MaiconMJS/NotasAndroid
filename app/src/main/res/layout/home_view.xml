@@ -50,7 +50,7 @@
                         android:layout_marginEnd="30dp"
                         android:fontFamily="@font/amaranth"
                         android:textColor="@color/white"
-                        android:textSize="30sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
