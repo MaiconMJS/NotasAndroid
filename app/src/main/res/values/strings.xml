@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Notas</string>
+    <string name="total_de_notas">Total De Notas</string>
 </resources>

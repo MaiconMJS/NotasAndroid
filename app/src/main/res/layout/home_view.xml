@@ -58,7 +58,8 @@
                         android:id="@+id/txt_info_notes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total De Notas"
+                        android:fontFamily="@font/amaranth"
+                        android:text="@string/total_de_notas"
                         android:textColor="@color/white"
                         android:textSize="30sp"
                         android:textStyle="bold"
@@ -71,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="80dp"
-                        android:text="1"
+                        android:fontFamily="@font/amaranth"
                         android:textColor="@color/white"
                         android:textSize="50sp"
                         android:textStyle="bold"
@@ -85,7 +86,7 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <androidx.recyclerview.widget.RecyclerView

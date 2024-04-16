@@ -3,5 +3,6 @@ package com.newoverride.notas.model
 data class Nota(
     val titulo: String,
     val descricao: String,
-    val ativo: Boolean
+    var ativoCheckBox: Boolean = false,
+    var removeNote: Boolean = false
 )

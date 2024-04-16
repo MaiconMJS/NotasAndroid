@@ -15,7 +15,7 @@ class HomeAdapter(private val context: Context, private val notas: List<Nota>) :
         fun bind(nota: Nota) {
             binding.txtCardTitulo.text = nota.titulo
             binding.txtCardDescricao.text = nota.descricao
-            binding.checkbox.visibility = if (nota.ativo) View.VISIBLE else View.GONE
+            binding.checkbox.visibility = if (nota.ativoCheckBox) View.VISIBLE else View.GONE
         }
     }
 
