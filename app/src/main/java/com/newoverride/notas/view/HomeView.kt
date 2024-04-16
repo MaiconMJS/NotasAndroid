@@ -44,6 +44,7 @@ class HomeView : AppCompatActivity(), Home.View {
         allNotes: String,
         displayView: List<Nota>
     ) {
+        // EXIBINDO TOTAL DE NOTAS!
         binding!!.txtInfoAllNotes.text = allNotes
         // CONFIGURANDO ADAPTER!
         val adapter = HomeAdapter(this, displayView)
