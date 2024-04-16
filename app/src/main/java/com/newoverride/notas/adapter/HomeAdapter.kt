@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.newoverride.notas.databinding.NotasBinding
 import com.newoverride.notas.model.Nota
 
-class HomeAdapter(private val context: Context, private val notas: List<Nota>) :
+class HomeAdapter(
+    private val context: Context,
+    private val notas: MutableList<Nota>,
+) :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
     inner class HomeViewHolder(private val binding: NotasBinding) :
         RecyclerView.ViewHolder(binding.root) {
