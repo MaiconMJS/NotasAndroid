@@ -2,6 +2,8 @@ package com.newoverride.notas.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -53,7 +55,10 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
                     dataList!!.removeAt(index)
                     adapter?.notifyItemRemoved(index) // NOTIFICA QUE UM ITEM FOI REMOVIDO NA POSIÇÃO ESPECÍFICA
                 }
-                presenter!!.data(dataList!!)
+                // ANIMA OS CHECKBOX SE ESTIVEREM VISÍVEIS!
+                Handler(Looper.getMainLooper()).postDelayed({
+                    presenter!!.data(dataList!!)
+                }, 500)
             }
         }
     }
