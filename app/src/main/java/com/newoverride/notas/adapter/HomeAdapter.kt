@@ -25,6 +25,7 @@ class HomeAdapter(
             binding.txtCardTitulo.text = nota.titulo
             binding.txtCardDescricao.text = nota.descricao
             binding.checkbox.visibility = if (nota.ativoCheckBox) View.VISIBLE else View.GONE
+            binding.checkbox.isChecked = if (nota.removeNote) true else false
 
             // FAZ UMA ANIMAÇÃO NO CHECKBOX!
             val checkBox = binding.checkbox
