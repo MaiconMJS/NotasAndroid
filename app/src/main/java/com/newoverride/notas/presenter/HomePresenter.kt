@@ -21,6 +21,7 @@ class HomePresenter(
 
             override fun onFailure(msg: String) {
                 view.showError(msg)
+                view.showDisplay(displayView)
             }
         })
     }

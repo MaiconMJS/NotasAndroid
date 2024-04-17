@@ -33,10 +33,27 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
         presenter = HomePresenter(this, DependencyInjector.homeRepository())
         presenter?.data(dataList!!)
 
+        // ESCUTANDO BOTÕES
         with(binding) {
             this?.btnAddNote?.setOnClickListener {
                 val intent = Intent(it.context, AddNote::class.java)
                 startActivity(intent)
+            }
+            // REMOVE NOTA DA LISTA!
+            this?.btnImgLixeira?.setOnClickListener {
+                val itemsToRemove = mutableListOf<Int>()
+                dataList!!.forEachIndexed { index, nota ->
+                    if (nota.removeNote) {
+                        itemsToRemove.add(index) // Adiciona o índice dos itens a serem removidos
+                    }
+                }
+
+                // Removendo itens de trás para frente para não afetar os índices dos itens a serem removidos em seguida
+                for (index in itemsToRemove.reversed()) {
+                    dataList!!.removeAt(index)
+                    adapter?.notifyItemRemoved(index) // Notifica que um item foi removido na posição especificada
+                }
+                presenter!!.data(dataList!!)
             }
         }
     }
