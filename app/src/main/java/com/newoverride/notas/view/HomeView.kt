@@ -3,6 +3,7 @@ package com.newoverride.notas.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.newoverride.notas.AddNote
@@ -13,12 +14,15 @@ import com.newoverride.notas.databinding.HomeViewBinding
 import com.newoverride.notas.model.Nota
 import com.newoverride.notas.presenter.HomePresenter
 
-class HomeView : AppCompatActivity(), Home.View {
+class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
 
-    private var presenter: Home.Presenter? = null
-    private var binding: HomeViewBinding? = null
-    private var dataList: MutableList<Nota>? = mutableListOf()
     private var adapter: HomeAdapter? = null
+    private var binding: HomeViewBinding? = null
+
+    companion object {
+        var dataList: MutableList<Nota>? = mutableListOf()
+        var presenter: Home.Presenter? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +31,12 @@ class HomeView : AppCompatActivity(), Home.View {
 
         // INICIANDO O PRESENTER!
         presenter = HomePresenter(this, DependencyInjector.homeRepository())
-        presenter!!.data(dataList!!)
+        presenter?.data(dataList!!)
 
-        // ESCUTANDO BOTÕES E LIXEIRA!
         with(binding) {
             this?.btnAddNote?.setOnClickListener {
                 val intent = Intent(it.context, AddNote::class.java)
                 startActivity(intent)
-                finish()
             }
         }
     }
@@ -42,16 +44,14 @@ class HomeView : AppCompatActivity(), Home.View {
     override fun showDisplay(
         displayView: MutableList<Nota>
     ) {
-        // EXIBINDO TOTAL DE NOTAS!
-        binding!!.txtInfoAllNotes.text = displayView.size.toString()
-        // CONFIGURANDO ADAPTER!
-        adapter = HomeAdapter(this, displayView)
-        binding!!.rvMain.adapter = adapter
-        binding!!.rvMain.layoutManager = GridLayoutManager(this, 2)
+        binding?.txtInfoAllNotes?.text = displayView.size.toString()
+        adapter = HomeAdapter(this, dataList!!, this)
+        binding?.rvMain?.adapter = adapter
+        binding?.rvMain?.layoutManager = GridLayoutManager(this, 2)
     }
 
     override fun showError(msg: String) {
-        binding!!.txtInfoErr.text = msg
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 
     override fun showLoading(active: Boolean) {
@@ -65,5 +65,11 @@ class HomeView : AppCompatActivity(), Home.View {
         adapter = null
         dataList = null
         super.onDestroy()
+    }
+
+    override fun onClickEdit(position: Int) {
+        val intent = Intent(this, AddNote::class.java)
+        intent.putExtra("position", position)
+        startActivity(intent)
     }
 }

@@ -75,6 +75,7 @@
         android:background="@android:color/transparent"
         android:fontFamily="@font/amaranth"
         android:gravity="start"
+        android:hint="@string/dica_para_usuário"
         android:inputType="textMultiLine|textCapWords"
         android:padding="16dp"
         android:textSize="30sp"

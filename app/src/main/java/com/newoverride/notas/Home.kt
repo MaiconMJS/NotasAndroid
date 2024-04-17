@@ -23,4 +23,8 @@ interface Home {
         fun onComplete(active: Boolean = false)
         fun onFailure(msg: String)
     }
+
+    interface editOnClick {
+        fun onClickEdit(position: Int)
+    }
 }

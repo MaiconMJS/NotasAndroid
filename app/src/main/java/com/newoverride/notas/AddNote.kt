@@ -1,9 +1,9 @@
 package com.newoverride.notas
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.newoverride.notas.databinding.AddNoteBinding
+import com.newoverride.notas.model.Nota
 import com.newoverride.notas.view.HomeView
 
 class AddNote : AppCompatActivity() {
@@ -14,13 +14,25 @@ class AddNote : AppCompatActivity() {
         binding = AddNoteBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
-        // ESCUTANDO BOTÃO VOLTAR!
+        val index = intent.getIntExtra("position", -1)
+        if (index != -1 && HomeView.dataList != null) {
+            val nota = HomeView.dataList?.get(index)
+            binding?.txtTitulo?.setText(nota?.titulo)
+            binding?.txtDesc?.setText(nota?.descricao)
+        }
+        // ESCUTANDO BOTÃO VOLTAR E SALVANDO UM NOTA NOVA SE NÃO FOR VAZIO && EDITANDO NOTAS EXISTENTES!
         with(binding) {
             this?.btnAdicionarNota?.setOnClickListener {
                 val title = txtTitulo.text.toString()
                 val desc = txtDesc.text.toString()
-                val intent = Intent(it.context, HomeView::class.java)
-                startActivity(intent)
+                if (!title.isNullOrBlank() && !desc.isNullOrBlank()) {
+                    if (index != -1) {
+                        HomeView.dataList?.set(index, Nota(title, desc))
+                    } else {
+                        HomeView.dataList?.add(Nota(title, desc))
+                    }
+                    HomeView.presenter?.data(HomeView.dataList!!)
+                }
                 finish()
             }
         }

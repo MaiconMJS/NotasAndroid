@@ -3,4 +3,5 @@
     <string name="total_de_notas">Total De Notas</string>
     <string name="add_notas">Adicione uma Nota!</string>
     <string name="titulo_new_nota">Digíte o Título</string>
+    <string name="dica_para_usuário">Digite sua Descrição! Salva somente se houver título e descrição! salva automaticamente ao voltar.</string>
 </resources>

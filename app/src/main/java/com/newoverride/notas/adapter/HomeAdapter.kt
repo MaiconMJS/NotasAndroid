@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.newoverride.notas.Home
 import com.newoverride.notas.databinding.NotasBinding
 import com.newoverride.notas.model.Nota
 
 class HomeAdapter(
     private val context: Context,
     private val notas: MutableList<Nota>,
+    private val editCallBack: Home.editOnClick
 ) :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
     inner class HomeViewHolder(private val binding: NotasBinding) :
@@ -19,6 +21,13 @@ class HomeAdapter(
             binding.txtCardTitulo.text = nota.titulo
             binding.txtCardDescricao.text = nota.descricao
             binding.checkbox.visibility = if (nota.ativoCheckBox) View.VISIBLE else View.GONE
+        }
+        init {
+            with(binding) {
+                cardView.setOnClickListener {
+                    editCallBack.onClickEdit(adapterPosition)
+                }
+            }
         }
     }
 

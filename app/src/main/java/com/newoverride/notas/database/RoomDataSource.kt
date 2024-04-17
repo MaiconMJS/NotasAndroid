@@ -5,7 +5,6 @@ import com.newoverride.notas.model.Nota
 
 class RoomDataSource : Home.HomeDataSource {
     override fun homeData(displayData: MutableList<Nota>, callback: Home.HomeCallback) {
-        displayData.add(Nota("Título", "Aqui você digita seu texto!"))
         callback.onLoad(true)
         if (displayData.isEmpty()) {
             callback.onFailure("Erro ao Carregar Notas!")
