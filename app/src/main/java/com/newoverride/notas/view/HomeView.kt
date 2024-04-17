@@ -44,14 +44,14 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
                 val itemsToRemove = mutableListOf<Int>()
                 dataList!!.forEachIndexed { index, nota ->
                     if (nota.removeNote) {
-                        itemsToRemove.add(index) // Adiciona o índice dos itens a serem removidos
+                        itemsToRemove.add(index) // ADICIONA O ÍNDICE DOS ITENS A SEREM REMOVIDOS!
                     }
                 }
 
-                // Removendo itens de trás para frente para não afetar os índices dos itens a serem removidos em seguida
+                // REMOVENDO ITENS DE TRÁS PARA FRENTE PARA NÃO AFETAR OS ÍNDICES DOS ITENS A SEREM REMOVIDOS EM SEGUIDA!
                 for (index in itemsToRemove.reversed()) {
                     dataList!!.removeAt(index)
-                    adapter?.notifyItemRemoved(index) // Notifica que um item foi removido na posição especificada
+                    adapter?.notifyItemRemoved(index) // NOTIFICA QUE UM ITEM FOI REMOVIDO NA POSIÇÃO ESPECÍFICA
                 }
                 presenter!!.data(dataList!!)
             }
