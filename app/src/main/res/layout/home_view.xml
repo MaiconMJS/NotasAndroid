@@ -42,6 +42,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <TextView
+                        android:id="@+id/txt_select_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/amaranth"
+                        android:text="@string/select_all"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <ImageButton
                         android:id="@+id/btn_add_note"
                         android:layout_width="wrap_content"
@@ -81,7 +100,7 @@
                         android:id="@+id/txt_info_all_notes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="80dp"
+                        android:layout_marginStart="81dp"
                         android:fontFamily="@font/amaranth"
                         android:textColor="@color/white"
                         android:textSize="50sp"
