@@ -25,39 +25,47 @@ class HomeAdapter(
             binding.txtCardTitulo.text = nota.titulo
             binding.txtCardDescricao.text = nota.descricao
             binding.checkbox.visibility = if (nota.ativoCheckBox) View.VISIBLE else View.GONE
-            binding.checkbox.isChecked = if (nota.removeNote) true else false
+            binding.checkbox.isChecked = nota.removeNote
 
             // FAZ UMA ANIMAÇÃO NO CHECKBOX!
             val checkBox = binding.checkbox
-            if (nota.ativoCheckBox) {
+            if (nota.ativoCheckBox && !nota.animacaoExecutada) {
                 checkBox.translationX = -200f // Começa fora da tela para a esquerda
                 checkBox.visibility = View.VISIBLE
                 val slideInAnimator = ObjectAnimator.ofFloat(checkBox, "translationX", -200f, 0f)
                 slideInAnimator.duration = 300
                 slideInAnimator.start()
-            } else {
-                val slideOutAnimator = ObjectAnimator.ofFloat(checkBox, "translationX", 0f, 200f)
-                slideOutAnimator.duration = 300
-                slideOutAnimator.addListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        checkBox.visibility = View.GONE
-                    }
-                })
-                slideOutAnimator.start()
+                nota.animacaoExecutada = true
+            } else if (!nota.animacaoExecutada) {
+                if (checkBox.visibility == View.VISIBLE) {
+                    val slideOutAnimator =
+                        ObjectAnimator.ofFloat(checkBox, "translationX", 0f, 200f)
+                    slideOutAnimator.duration = 300
+                    slideOutAnimator.addListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator) {
+                            checkBox.visibility = View.GONE
+                        }
+                    })
+                    slideOutAnimator.start()
+                }
+                nota.animacaoExecutada = false
             }
         }
+
         init {
             with(binding) {
                 cardView.setOnClickListener {
                     editCallBack.onClickEdit(adapterPosition)
                 }
                 cardView.setOnLongClickListener {
-                    HomeView.dataList!![adapterPosition].ativoCheckBox = !HomeView.dataList!![adapterPosition].ativoCheckBox
+                    HomeView.dataList!![adapterPosition].ativoCheckBox =
+                        !HomeView.dataList!![adapterPosition].ativoCheckBox
                     notifyItemChanged(adapterPosition)
                     true
                 }
                 checkbox.setOnClickListener {
-                    HomeView.dataList!![adapterPosition].removeNote = !HomeView.dataList!![adapterPosition].removeNote
+                    HomeView.dataList!![adapterPosition].removeNote =
+                        !HomeView.dataList!![adapterPosition].removeNote
                 }
             }
         }

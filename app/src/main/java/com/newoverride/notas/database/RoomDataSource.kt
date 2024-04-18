@@ -5,9 +5,9 @@ import com.newoverride.notas.model.Nota
 
 class RoomDataSource : Home.HomeDataSource {
     override fun homeData(displayData: MutableList<Nota>, callback: Home.HomeCallback) {
-        callback.onLoad(true)
         if (displayData.isEmpty()) {
-            callback.onFailure("Erro ao Carregar Notas!")
+            callback.onLoad(true)
+            callback.onFailure("Buscando Notas..")
         } else {
             callback.onComplete(false)
         }

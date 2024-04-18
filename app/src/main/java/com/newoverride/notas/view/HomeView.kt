@@ -2,8 +2,6 @@ package com.newoverride.notas.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,9 +16,10 @@ import com.newoverride.notas.presenter.HomePresenter
 
 class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
 
-    private var adapter: HomeAdapter? = null
     private var binding: HomeViewBinding? = null
+    private var adapter: HomeAdapter? = null
 
+    // VARIÁVEIS STÁTICAS!
     companion object {
         var dataList: MutableList<Nota>? = mutableListOf()
         var presenter: Home.Presenter? = null
@@ -37,32 +36,40 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
 
         // ESCUTANDO BOTÕES
         with(binding) {
+            // NAVEGA PARA PRÓXIMA TELA!
             this?.btnAddNote?.setOnClickListener {
                 val intent = Intent(it.context, AddNote::class.java)
                 startActivity(intent)
             }
             // REMOVE NOTA DA LISTA!
             this?.btnImgLixeira?.setOnClickListener {
-                val itemsToRemove = mutableListOf<Int>()
-                dataList!!.forEachIndexed { index, nota ->
-                    if (nota.removeNote) {
-                        itemsToRemove.add(index) // ADICIONA O ÍNDICE DOS ITENS A SEREM REMOVIDOS!
-                    }
-                }
-
-                // REMOVENDO ITENS DE TRÁS PARA FRENTE PARA NÃO AFETAR OS ÍNDICES DOS ITENS A SEREM REMOVIDOS EM SEGUIDA!
-                for (index in itemsToRemove.reversed()) {
-                    dataList!!.removeAt(index)
-                    adapter?.notifyItemRemoved(index) // NOTIFICA QUE UM ITEM FOI REMOVIDO NA POSIÇÃO ESPECÍFICA
-                }
-                // ANIMA OS CHECKBOX SE ESTIVEREM VISÍVEIS!
-                Handler(Looper.getMainLooper()).postDelayed({
-                    presenter!!.data(dataList!!)
-                }, 500)
+                removeNote()
             }
         }
     }
 
+    // REMOVE A NOTA SELECIONADA DA LIXEIRA!
+    private fun removeNote() {
+        val itemsToRemove = mutableListOf<Int>()
+        dataList!!.forEachIndexed { index, nota ->
+            if (nota.removeNote) {
+                itemsToRemove.add(index) // ADICIONA O ÍNDICE DOS ITENS A SEREM REMOVIDOS!
+            }
+        }
+        // REMOVENDO ITENS DE TRÁS PARA FRENTE PARA NÃO AFETAR OS ÍNDICES DOS ITENS A SEREM REMOVIDOS EM SEGUIDA!
+        for (index in itemsToRemove.reversed()) {
+            dataList!!.removeAt(index)
+            adapter?.notifyItemRemoved(index) // NOTIFICA QUE UM ITEM FOI REMOVIDO NA POSIÇÃO ESPECÍFICA
+        }
+        updateTotal()
+    }
+
+    // ATUALIZA O TOTAL DE NOTAS AO DELETAR!
+    private fun updateTotal() {
+        binding?.txtInfoAllNotes?.text = dataList?.size.toString()
+    }
+
+    // EXIBE NO DISPLAY AS NOTAS
     override fun showDisplay(
         displayView: MutableList<Nota>
     ) {
@@ -72,10 +79,12 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
         binding?.rvMain?.layoutManager = GridLayoutManager(this, 2)
     }
 
+    // EXIBE NO DISPLAY INFORMAÇÃO DE BUSCA DE NOTAS!
     override fun showError(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
+    // EXIBE NA TELA UM PROGRESS DE CARREGAMENTO!
     override fun showLoading(active: Boolean) {
         binding!!.progressBar.visibility = if (active) View.VISIBLE else View.GONE
     }
@@ -89,6 +98,7 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
         super.onDestroy()
     }
 
+    // RESPONSÁVEL POR LEVAR A POSIÇÃO A TELA ADDNOTE!
     override fun onClickEdit(position: Int) {
         val intent = Intent(this, AddNote::class.java)
         intent.putExtra("position", position)

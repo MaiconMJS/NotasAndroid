@@ -1,5 +1,7 @@
 package com.newoverride.notas.presenter
 
+import android.os.Handler
+import android.os.Looper
 import com.newoverride.notas.Home
 import com.newoverride.notas.database.HomeRepository
 import com.newoverride.notas.model.Nota
@@ -12,6 +14,9 @@ class HomePresenter(
         repository.homeData(displayView, object : Home.HomeCallback {
             override fun onLoad(active: Boolean) {
                 view.showLoading(active)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    view.showLoading(false)
+                }, 2000)
             }
 
             override fun onComplete(active: Boolean) {
