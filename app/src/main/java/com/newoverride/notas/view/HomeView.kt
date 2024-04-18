@@ -1,13 +1,15 @@
 package com.newoverride.notas.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import com.newoverride.notas.AddNote
 import com.newoverride.notas.Home
+import com.newoverride.notas.R
 import com.newoverride.notas.adapter.HomeAdapter
 import com.newoverride.notas.database.DependencyInjector
 import com.newoverride.notas.databinding.HomeViewBinding
@@ -23,6 +25,7 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
     companion object {
         var dataList: MutableList<Nota>? = mutableListOf()
         var presenter: Home.Presenter? = null
+        var txtSelectAllVerify = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +37,7 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
         presenter = HomePresenter(this, DependencyInjector.homeRepository())
         presenter?.data(dataList!!)
 
-        // ESCUTANDO BOTÕES
+        // ESCUTANDO BOTÕES!
         with(binding) {
             // NAVEGA PARA PRÓXIMA TELA!
             this?.btnAddNote?.setOnClickListener {
@@ -45,23 +48,71 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
             this?.btnImgLixeira?.setOnClickListener {
                 removeNote()
             }
+            // VERIFICA SE HÁ NOTAS SELECIONADAS SE HOUVER DESMARCA TUDO SE NÃO MARCA TODAS!
+            this?.txtSelectAll!!.setOnClickListener {
+                verificaSeHaNotasSelecionadas()
+            }
         }
+    }
+
+    // VERIFICA SE HÁ NOTAS SELECIONADAS SE HOUVER DESMARCA TUDO SE NÃO MARCA TODAS!
+    @SuppressLint("NotifyDataSetChanged")
+    private fun verificaSeHaNotasSelecionadas() {
+        if (txtSelectAllVerify) {
+            dataList!!.forEach { value ->
+                value.removeNote = false
+                value.ativoCheckBox = false
+            }
+        } else {
+            dataList!!.forEach { value ->
+                value.ativoCheckBox = true
+                value.removeNote = true
+            }
+        }
+        txtSelectAllVerify = !txtSelectAllVerify
+        adapter!!.notifyDataSetChanged()
     }
 
     // REMOVE A NOTA SELECIONADA DA LIXEIRA!
     private fun removeNote() {
-        val itemsToRemove = mutableListOf<Int>()
-        dataList!!.forEachIndexed { index, nota ->
-            if (nota.removeNote) {
-                itemsToRemove.add(index) // ADICIONA O ÍNDICE DOS ITENS A SEREM REMOVIDOS!
-            }
+        // VERIFICA SE ALGUM CHECKBOX FOI MARCADO!
+        val isAnyNoteSelected = dataList!!.any { nota -> nota.removeNote }
+        if (isAnyNoteSelected) {
+            txtSelectAllVerify = !txtSelectAllVerify
+            val dialogBuilder = AlertDialog.Builder(this)
+            dialogBuilder.setMessage(getString(R.string.tem_certeza))
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.sim)) { _, _ ->
+                    val itemsToRemove = mutableListOf<Int>()
+                    dataList!!.forEachIndexed { index, nota ->
+                        if (nota.removeNote) {
+                            itemsToRemove.add(index) // ADICIONA O ÍNDICE DOS ITENS A SEREM REMOVIDOS!
+                        }
+                    }
+                    // REMOVENDO ITENS DE TRÁS PARA FRENTE PARA NÃO AFETAR OS ÍNDICES DOS ITENS A SEREM REMOVIDOS EM SEGUIDA!
+                    for (index in itemsToRemove.reversed()) {
+                        dataList!!.removeAt(index)
+                        adapter?.notifyItemRemoved(index) // NOTIFICA QUE UM ITEM FOI REMOVIDO NA POSIÇÃO ESPECÍFICA!
+                    }
+                    updateTotal()
+                    Toast.makeText(
+                        this@HomeView,
+                        getString(R.string.exclusao_concluida),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                .setNegativeButton(getString(R.string.nao)) { dialog, _ ->
+                    dialog.cancel()
+                }
+            val alert = dialogBuilder.create()
+            alert.setTitle(getString(R.string.confirma))
+            alert.show()
+            // PERSONALIZANDO A COR DOS BOTÕES PARA AMARELO!
+            alert.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setTextColor(getResources().getColor(R.color.yellow))
+            alert.getButton(AlertDialog.BUTTON_NEGATIVE)
+                .setTextColor(getResources().getColor(R.color.yellow))
         }
-        // REMOVENDO ITENS DE TRÁS PARA FRENTE PARA NÃO AFETAR OS ÍNDICES DOS ITENS A SEREM REMOVIDOS EM SEGUIDA!
-        for (index in itemsToRemove.reversed()) {
-            dataList!!.removeAt(index)
-            adapter?.notifyItemRemoved(index) // NOTIFICA QUE UM ITEM FOI REMOVIDO NA POSIÇÃO ESPECÍFICA
-        }
-        updateTotal()
     }
 
     // ATUALIZA O TOTAL DE NOTAS AO DELETAR!
@@ -69,7 +120,7 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
         binding?.txtInfoAllNotes?.text = dataList?.size.toString()
     }
 
-    // EXIBE NO DISPLAY AS NOTAS
+    // EXIBE NO DISPLAY AS NOTAS!
     override fun showDisplay(
         displayView: MutableList<Nota>
     ) {

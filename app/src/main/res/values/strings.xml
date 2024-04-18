@@ -4,5 +4,10 @@
     <string name="add_notas">Adicione uma Nota!</string>
     <string name="titulo_new_nota">Insira o título aqui!</string>
     <string name="dica_para_usuário">Digite seu texto aqui!</string>
-    <string name="select_all">Click Para\nSelecionar Todas\nAs Notas</string>
+    <string name="select_all">Click Seleciona Tudo\nOu\nDesmarca Tudo</string>
+    <string name="confirma">Confirmação de Exclusão!</string>
+    <string name="sim">Sim</string>
+    <string name="tem_certeza">Toda nota selecionada será Excluída?</string>
+    <string name="exclusao_concluida">Exclusão concluída!</string>
+    <string name="nao">Não</string>
 </resources>

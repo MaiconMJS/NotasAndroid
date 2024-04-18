@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddNote">
+    tools:context=".view.AddNote">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_add_note"
@@ -74,7 +74,7 @@
         android:layout_height="0dp"
         android:autofillHints="@null"
         android:background="@android:color/transparent"
-        android:fontFamily="@font/amaranth"
+        android:fontFamily="@font/architects_daughter"
         android:gravity="start"
         android:hint="@string/dica_para_usuário"
         android:inputType="textMultiLine|textCapSentences"

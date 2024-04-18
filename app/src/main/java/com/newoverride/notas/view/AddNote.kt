@@ -1,11 +1,10 @@
-package com.newoverride.notas
+package com.newoverride.notas.view
 
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.newoverride.notas.databinding.AddNoteBinding
 import com.newoverride.notas.model.Nota
-import com.newoverride.notas.view.HomeView
 
 class AddNote : AppCompatActivity() {
 
@@ -41,6 +40,7 @@ class AddNote : AppCompatActivity() {
             binding?.txtTitulo?.setText(nota?.titulo)
             binding?.txtDesc?.setText(nota?.descricao)
         }
+        HomeView.txtSelectAllVerify = !HomeView.txtSelectAllVerify
     }
 
     // SALVA A NOTA OU ATUALIZA OS DADOS DE UMA EXISTENTE!
@@ -55,9 +55,10 @@ class AddNote : AppCompatActivity() {
             }
             HomeView.presenter?.data(HomeView.dataList!!)
         }
+        HomeView.txtSelectAllVerify = !HomeView.txtSelectAllVerify
         finish()
     }
-
+    // DESTROI VARIÁVEIS DE CAMPO!
     override fun onDestroy() {
         binding = null
         super.onDestroy()

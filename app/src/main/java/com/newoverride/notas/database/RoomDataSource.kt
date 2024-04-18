@@ -7,7 +7,7 @@ class RoomDataSource : Home.HomeDataSource {
     override fun homeData(displayData: MutableList<Nota>, callback: Home.HomeCallback) {
         if (displayData.isEmpty()) {
             callback.onLoad(true)
-            callback.onFailure("Buscando Notas..")
+            callback.onFailure("Buscando Notas!")
         } else {
             callback.onComplete(false)
         }

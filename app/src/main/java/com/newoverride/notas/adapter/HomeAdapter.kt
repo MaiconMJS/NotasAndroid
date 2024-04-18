@@ -60,6 +60,8 @@ class HomeAdapter(
                 cardView.setOnLongClickListener {
                     HomeView.dataList!![adapterPosition].ativoCheckBox =
                         !HomeView.dataList!![adapterPosition].ativoCheckBox
+                    HomeView.dataList!![adapterPosition].removeNote = false
+                    HomeView.txtSelectAllVerify = !HomeView.txtSelectAllVerify
                     notifyItemChanged(adapterPosition)
                     true
                 }
