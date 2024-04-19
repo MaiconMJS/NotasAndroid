@@ -42,7 +42,6 @@ class AddNote : AppCompatActivity() {
             binding?.txtTitulo?.setText(nota?.titulo)
             binding?.txtDesc?.setText(nota?.descricao)
         }
-        HomeView.txtSelectAllVerify = !HomeView.txtSelectAllVerify
     }
 
     // SALVA A NOTA OU ATUALIZA OS DADOS DE UMA EXISTENTE!
@@ -96,7 +95,6 @@ class AddNote : AppCompatActivity() {
                 }.start()
             }
         }
-        HomeView.txtSelectAllVerify = !HomeView.txtSelectAllVerify
         finish()
     }
 

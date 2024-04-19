@@ -82,18 +82,12 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
     // VERIFICA SE HÁ NOTAS SELECIONADAS SE HOUVER DESMARCA TUDO SE NÃO MARCA TODAS!
     @SuppressLint("NotifyDataSetChanged")
     private fun verificaSeHaNotasSelecionadas() {
-        if (txtSelectAllVerify) {
-            dataList!!.forEach { value ->
-                value.removeNote = false
-                value.ativoCheckBox = false
-            }
-        } else {
-            dataList!!.forEach { value ->
-                value.ativoCheckBox = true
-                value.removeNote = true
-            }
+        val allSelect = dataList!!.all { it.removeNote }
+        dataList!!.forEach { nota ->
+            nota.ativoCheckBox = !allSelect
+            nota.removeNote = !allSelect
         }
-        txtSelectAllVerify = !txtSelectAllVerify
+        txtSelectAllVerify = !allSelect
         adapter!!.notifyDataSetChanged()
     }
 
@@ -106,7 +100,6 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
             dialogBuilder.setMessage(getString(R.string.tem_certeza))
                 .setCancelable(false)
                 .setPositiveButton(getString(R.string.sim)) { _, _ ->
-                    txtSelectAllVerify = !txtSelectAllVerify
                     val itemsToRemove = mutableListOf<Int>()
                     val listRoomNote = mutableListOf<RoomNote>()
                     dataList!!.forEachIndexed { index, nota ->
@@ -140,7 +133,6 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
                     ).show()
                 }
                 .setNegativeButton(getString(R.string.nao)) { dialog, _ ->
-                    txtSelectAllVerify = !txtSelectAllVerify
                     dialog.cancel()
                 }
             val alert = dialogBuilder.create()

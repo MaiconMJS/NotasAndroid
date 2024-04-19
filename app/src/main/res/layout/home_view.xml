@@ -100,7 +100,7 @@
                         android:id="@+id/txt_info_all_notes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="81dp"
+                        android:layout_marginStart="72dp"
                         android:fontFamily="@font/amaranth"
                         android:textColor="@color/white"
                         android:textSize="50sp"
