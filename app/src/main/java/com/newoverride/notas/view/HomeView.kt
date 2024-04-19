@@ -56,7 +56,6 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
         }
         // CHAMADA DE FUNÇÃO!
         buscaNoBancoPassaParaDataList()
-
     }
 
     // BUSCA NO BANCO DE DADOS E EXIBE NA TELA!
