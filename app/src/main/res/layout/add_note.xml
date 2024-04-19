@@ -74,7 +74,7 @@
         android:layout_height="0dp"
         android:autofillHints="@null"
         android:background="@android:color/transparent"
-        android:fontFamily="@font/architects_daughter"
+        android:fontFamily="@font/average"
         android:gravity="start"
         android:hint="@string/dica_para_usuário"
         android:inputType="textMultiLine|textCapSentences"

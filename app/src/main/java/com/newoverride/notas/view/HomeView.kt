@@ -8,10 +8,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.newoverride.notas.App
 import com.newoverride.notas.Home
 import com.newoverride.notas.R
 import com.newoverride.notas.adapter.HomeAdapter
 import com.newoverride.notas.database.DependencyInjector
+import com.newoverride.notas.database.RoomNote
 import com.newoverride.notas.databinding.HomeViewBinding
 import com.newoverride.notas.model.Nota
 import com.newoverride.notas.presenter.HomePresenter
@@ -35,7 +37,6 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
 
         // INICIANDO O PRESENTER!
         presenter = HomePresenter(this, DependencyInjector.homeRepository())
-        presenter?.data(dataList!!)
 
         // ESCUTANDO BOTÕES!
         with(binding) {
@@ -53,6 +54,30 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
                 verificaSeHaNotasSelecionadas()
             }
         }
+        // CHAMADA DE FUNÇÃO!
+        buscaNoBancoPassaParaDataList()
+
+    }
+
+    // BUSCA NO BANCO DE DADOS E EXIBE NA TELA!
+    private fun buscaNoBancoPassaParaDataList() {
+        Thread {
+            val app = application as App
+            val dao = app.db.noteDao()
+            val listOfBanco = dao.getAll()
+            listOfBanco.forEach { value ->
+                dataList!!.add(
+                    Nota(
+                        id = value.id,
+                        titulo = value.title.toString(),
+                        descricao = value.desc.toString()
+                    )
+                )
+            }
+            runOnUiThread {
+                presenter!!.data(dataList!!)
+            }
+        }.start()
     }
 
     // VERIFICA SE HÁ NOTAS SELECIONADAS SE HOUVER DESMARCA TUDO SE NÃO MARCA TODAS!
@@ -73,22 +98,36 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
         adapter!!.notifyDataSetChanged()
     }
 
-    // REMOVE A NOTA SELECIONADA DA LIXEIRA!
+    // REMOVE A NOTA SELECIONADA AO PRESSIONAR A LIXEIRA!
     private fun removeNote() {
         // VERIFICA SE ALGUM CHECKBOX FOI MARCADO!
         val isAnyNoteSelected = dataList!!.any { nota -> nota.removeNote }
         if (isAnyNoteSelected) {
-            txtSelectAllVerify = !txtSelectAllVerify
             val dialogBuilder = AlertDialog.Builder(this)
             dialogBuilder.setMessage(getString(R.string.tem_certeza))
                 .setCancelable(false)
                 .setPositiveButton(getString(R.string.sim)) { _, _ ->
+                    txtSelectAllVerify = !txtSelectAllVerify
                     val itemsToRemove = mutableListOf<Int>()
+                    val listRoomNote = mutableListOf<RoomNote>()
                     dataList!!.forEachIndexed { index, nota ->
                         if (nota.removeNote) {
                             itemsToRemove.add(index) // ADICIONA O ÍNDICE DOS ITENS A SEREM REMOVIDOS!
+                            listRoomNote.add(
+                                RoomNote(
+                                    id = nota.id!!.toInt(),
+                                    title = nota.titulo,
+                                    desc = nota.descricao
+                                )
+                            )
                         }
                     }
+                    Thread {
+                        val app = application as App
+                        val dao = app.db.noteDao()
+                        dao.delete(listRoomNote)
+                    }.start()
+
                     // REMOVENDO ITENS DE TRÁS PARA FRENTE PARA NÃO AFETAR OS ÍNDICES DOS ITENS A SEREM REMOVIDOS EM SEGUIDA!
                     for (index in itemsToRemove.reversed()) {
                         dataList!!.removeAt(index)
@@ -102,6 +141,7 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
                     ).show()
                 }
                 .setNegativeButton(getString(R.string.nao)) { dialog, _ ->
+                    txtSelectAllVerify = !txtSelectAllVerify
                     dialog.cancel()
                 }
             val alert = dialogBuilder.create()

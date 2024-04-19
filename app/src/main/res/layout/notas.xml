@@ -51,7 +51,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:ellipsize="end"
-            android:fontFamily="@font/architects_daughter"
+            android:fontFamily="@font/average"
             android:maxLines="4"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
