@@ -1,11 +1,9 @@
 package com.newoverride.notas.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.newoverride.notas.App
-import com.newoverride.notas.Home
 import com.newoverride.notas.database.NoteDao
 import com.newoverride.notas.database.RoomNote
 import com.newoverride.notas.databinding.AddNoteBinding
