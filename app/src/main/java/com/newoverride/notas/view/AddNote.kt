@@ -1,9 +1,12 @@
 package com.newoverride.notas.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.newoverride.notas.App
+import com.newoverride.notas.Home
+import com.newoverride.notas.database.NoteDao
 import com.newoverride.notas.database.RoomNote
 import com.newoverride.notas.databinding.AddNoteBinding
 import com.newoverride.notas.model.Nota
@@ -49,53 +52,35 @@ class AddNote : AppCompatActivity() {
         val title = binding?.txtTitulo?.text.toString()
         val desc = binding?.txtDesc?.text.toString()
         if (title.isNotBlank() || desc.isNotBlank()) {
-            if (index != -1) {
-                val id = HomeView.dataList!![index].id
-                Thread {
-                    // ATUALIZA NO BANCO!
-                    val app = application as App
-                    val dao = app.db.noteDao()
+            Thread {
+                val app = application as App
+                val dao = app.db.noteDao()
+                if (index != -1) { // ATUALIZA NOTA EXSTENTE!
+                    val id = HomeView.dataList!![index].id
                     dao.update(RoomNote(id = id!!.toInt(), title = title, desc = desc))
-                    val listAll = dao.getAll()
-                    HomeView.dataList!!.clear()
-                    listAll.forEach { value ->
-                        HomeView.dataList!!.add(
-                            Nota(
-                                id = value.id,
-                                titulo = value.title.toString(),
-                                descricao = value.desc.toString()
-                            )
-                        )
-                    }
-                    runOnUiThread {
-                        HomeView.presenter?.data(HomeView.dataList!!)
-                    }
-                }.start()
-            } else {
-                Thread {
-                    // SALVA NO BANCO!
-                    val app = application as App
-                    val dao = app.db.noteDao()
-                    dao.insert(RoomNote(title = title, desc = desc))
-                    // RESCONSTRÓI A LISTA!
-                    HomeView.dataList!!.clear()
-                    val listAll = dao.getAll()
-                    listAll.forEach { value ->
-                        HomeView.dataList!!.add(
-                            Nota(
-                                id = value.id,
-                                titulo = value.title.toString(),
-                                descricao = value.desc.toString()
-                            )
-                        )
-                    }
-                    runOnUiThread {
-                        HomeView.presenter?.data(HomeView.dataList!!)
-                    }
-                }.start()
-            }
+                } else { // INSERE NOVA NOTA!
+                    val newNote = RoomNote(title = title, desc = desc)
+                    dao.insert(newNote)
+                }
+                atualizarListaDeNotas(dao)
+            }.start()
         }
         finish()
+    }
+
+    private fun atualizarListaDeNotas(dao: NoteDao) {
+        val listAll = dao.getAll().reversed()
+        HomeView.dataList!!.clear()
+        HomeView.dataList!!.addAll(listAll.map { value ->
+            Nota(
+                id = value.id,
+                titulo = value.title.toString(),
+                descricao = value.desc.toString()
+            )
+        })
+        runOnUiThread {
+            HomeView.presenter?.data(HomeView.dataList!!)
+        }
     }
 
     // DESTROI VARIÁVEIS DE CAMPO!

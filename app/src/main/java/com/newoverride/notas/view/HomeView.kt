@@ -63,7 +63,7 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
         Thread {
             val app = application as App
             val dao = app.db.noteDao()
-            val listOfBanco = dao.getAll()
+            val listOfBanco = dao.getAll().reversed()
             listOfBanco.forEach { value ->
                 dataList!!.add(
                     Nota(
