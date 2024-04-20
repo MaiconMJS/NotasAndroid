@@ -32,20 +32,24 @@ class AddNote : AppCompatActivity() {
             btnAdicionarNota.setOnClickListener {
                 salvaNotaOuAtualiza(index)
             }
-            // COMPARTILHA DESCRIÇÃO POR WHATSAPP!
             btnWhats.setOnClickListener {
-                val descricao = binding!!.txtDesc.text.toString()
-                if (descricao.isNotEmpty()) {
-                    val sendIntent = Intent().apply {
-                        action = Intent.ACTION_SEND
-                        type = "text/plain"
-                        setPackage("com.whatsapp")
-                        putExtra(Intent.EXTRA_TEXT, descricao)
-                    }
-                    val shareIntent = Intent.createChooser(sendIntent, null)
-                    startActivity(shareIntent)
-                }
+                compartilharWhatsApp()
             }
+        }
+    }
+
+    // COMPARTILHA DESCRIÇÃO PARA WHATSAPP!
+    private fun compartilharWhatsApp() {
+        val descricao = binding!!.txtDesc.text.toString()
+        if (descricao.isNotEmpty()) {
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                type = "text/plain"
+                setPackage("com.whatsapp")
+                putExtra(Intent.EXTRA_TEXT, descricao)
+            }
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
         }
     }
 
@@ -67,7 +71,7 @@ class AddNote : AppCompatActivity() {
         }
     }
 
-    // SALVA A NOTA OU ATUALIZA OS DADOS DE UMA EXISTENTE!
+    // SALVA A NOTA OU ATUALIZA OS DADOS DE UMA EXISTENTE, DEPOIS FECHA A ATIVIDADE VOLTANDO PARA TELA INICIAL!
     @RequiresApi(Build.VERSION_CODES.O)
     private fun salvaNotaOuAtualiza(index: Int) {
         val title = binding?.txtTitulo?.text.toString()

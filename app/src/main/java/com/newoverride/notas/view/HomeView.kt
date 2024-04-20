@@ -142,7 +142,7 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
             val alert = dialogBuilder.create()
             alert.setTitle(getString(R.string.confirma))
             alert.show()
-            // PERSONALIZANDO A COR DOS BOTÕES PARA AMARELO!
+            // PERSONALIZANDO A COR DOS BOTÕES PARA VERDE!
             alert.getButton(AlertDialog.BUTTON_POSITIVE)
                 .setTextColor(getResources().getColor(R.color.green))
             alert.getButton(AlertDialog.BUTTON_NEGATIVE)
@@ -170,7 +170,7 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
-    // EXIBE NA TELA UM PROGRESS DE CARREGAMENTO!
+    // EXIBE NA TELA UM PROGRESS DE CARREGAMENTO SE A LISTA FOR VAZIA!
     override fun showLoading(active: Boolean) {
         binding!!.progressBar.visibility = if (active) View.VISIBLE else View.GONE
     }
@@ -184,7 +184,7 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
         super.onDestroy()
     }
 
-    // RESPONSÁVEL POR LEVAR A POSIÇÃO A TELA ADDNOTE!
+    // RESPONSÁVEL POR LEVAR A POSIÇÃO DE UMA NOTA PARA TELA ADDNOTE!
     override fun onClickEdit(position: Int) {
         val intent = Intent(this, AddNote::class.java)
         intent.putExtra("position", position)

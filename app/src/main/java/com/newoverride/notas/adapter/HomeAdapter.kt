@@ -51,7 +51,7 @@ class HomeAdapter(
                 }
             }
         }
-
+        // ESCUTANDO CARD E CHECKBOX!
         init {
             with(binding) {
                 cardView.setOnClickListener {
