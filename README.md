@@ -10,7 +10,7 @@ permite criar, salvar e gerenciar suas notas de maneira simples e intuitiva.
 Para adicionar uma nova nota, siga os passos abaixo:
 
 1. Pressione o botão com o símbolo “+” na tela principal.
-2. <img src="tela_inicial.jpg" width="150" height="300">
+2. <img src="tela_inicial.jpg" width="300" height="600">
 2. Você será direcionado para a página de criação de nota.
 3. <img src="adicione_uma_nota.jpg" width="150" height="300">
 3. Insira um título no campo `Insira o título aqui`.
