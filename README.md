@@ -58,7 +58,7 @@ Certifique-se de ter o aplicativo do WhatsApp instalado em seu dispositivo para 
 
 ## Contribuições
 Seus comentários e contribuições são bem-vindos! Se você tem alguma sugestão para melhorar este aplicativo ou deseja reportar um bug, por favor, entre em contato através do e-mail newoverride@gmail.com.
-Agradecemos seu apoio para melhorar continuamente nossa aplicação.
+Agradeço seu apoio para melhorar continuamente minha aplicação.
 
 
 ## Conclusão
@@ -67,4 +67,4 @@ interface amigável e processos simples, você pode manter suas informações or
 
 ## Contribuições
 Seus comentários e contribuições são bem-vindos! Se você tem alguma sugestão para melhorar este aplicativo ou deseja reportar um bug, por favor, entre em contato através do e-mail newoverride@gmail.com.
-Agradecemos seu apoio para melhorar continuamente nossa aplicação.
+Agradeço seu apoio para melhorar continuamente minha aplicação.
