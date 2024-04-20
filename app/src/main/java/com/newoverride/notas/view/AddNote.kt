@@ -34,14 +34,16 @@ class AddNote : AppCompatActivity() {
             }
             // COMPARTILHA DESCRIÇÃO POR WHATSAPP!
             btnWhats.setOnClickListener {
-                val descricao = HomeView.dataList!![index].descricao
-                val sendIntent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, descricao)
-                    type = "text/plain"
+                val descricao = binding!!.txtDesc.text.toString()
+                if (descricao.isNotEmpty()) {
+                    val sendIntent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, descricao)
+                        type = "text/plain"
+                    }
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    startActivity(shareIntent)
                 }
-                val shareIntent = Intent.createChooser(sendIntent, null)
-                startActivity(shareIntent)
             }
         }
     }
