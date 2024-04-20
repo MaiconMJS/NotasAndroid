@@ -6,4 +6,6 @@ data class Nota(
     val descricao: String,
     var ativoCheckBox: Boolean = false,
     var removeNote: Boolean = false,
+    val hora: String = "",
+    val data: String = ""
 )

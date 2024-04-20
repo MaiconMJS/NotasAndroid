@@ -69,7 +69,9 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
                     Nota(
                         id = value.id,
                         titulo = value.title.toString(),
-                        descricao = value.desc.toString()
+                        descricao = value.desc.toString(),
+                        data = value.data.toString(),
+                        hora = value.hora.toString()
                     )
                 )
             }
@@ -109,7 +111,9 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
                                 RoomNote(
                                     id = nota.id!!.toInt(),
                                     title = nota.titulo,
-                                    desc = nota.descricao
+                                    desc = nota.descricao,
+                                    data = nota.data,
+                                    hora = nota.hora
                                 )
                             )
                         }

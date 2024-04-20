@@ -11,8 +11,8 @@
         android:id="@+id/toolbar_add_note"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:elevation="7dp"
         android:background="@color/green"
+        android:elevation="7dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -78,12 +78,26 @@
         android:gravity="start"
         android:hint="@string/dica_para_usuário"
         android:inputType="textMultiLine|textCapSentences"
-        android:padding="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        android:scrollbars="vertical"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_titulo"
         tools:ignore="LabelFor" />
+
+    <ImageButton
+        android:id="@+id/btn_whats"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/a"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
