@@ -29,14 +29,13 @@ class HomeAdapter(
 
             // FAZ UMA ANIMAÇÃO NO CHECKBOX!
             val checkBox = binding.checkbox
-            if (nota.ativoCheckBox && !nota.animacaoExecutada) {
+            if (nota.ativoCheckBox) {
                 checkBox.translationX = -200f // Começa fora da tela para a esquerda
                 checkBox.visibility = View.VISIBLE
                 val slideInAnimator = ObjectAnimator.ofFloat(checkBox, "translationX", -200f, 0f)
                 slideInAnimator.duration = 300
                 slideInAnimator.start()
-                nota.animacaoExecutada = true
-            } else if (!nota.animacaoExecutada) {
+            } else {
                 if (checkBox.visibility == View.VISIBLE) {
                     val slideOutAnimator =
                         ObjectAnimator.ofFloat(checkBox, "translationX", 0f, 200f)
@@ -48,7 +47,6 @@ class HomeAdapter(
                     })
                     slideOutAnimator.start()
                 }
-                nota.animacaoExecutada = false
             }
         }
 
@@ -61,7 +59,6 @@ class HomeAdapter(
                     HomeView.dataList!![adapterPosition].ativoCheckBox =
                         !HomeView.dataList!![adapterPosition].ativoCheckBox
                     HomeView.dataList!![adapterPosition].removeNote = false
-                    HomeView.txtSelectAllVerify = !HomeView.txtSelectAllVerify
                     notifyItemChanged(adapterPosition)
                     true
                 }

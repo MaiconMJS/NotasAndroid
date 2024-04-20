@@ -35,22 +35,20 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@color/yellow"
+                android:background="@color/green"
                 app:layout_scrollFlags="scroll|enterAlways">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
+                    <Button
                         android:id="@+id/txt_select_all"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="30dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
+                        android:backgroundTint="@color/green_light"
                         android:fontFamily="@font/amaranth"
                         android:text="@string/select_all"
                         android:textAlignment="center"
@@ -116,6 +114,10 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:scrollbarSize="6dp"
+            android:scrollbarThumbVertical="@color/green"
+            android:scrollbars="vertical"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <androidx.recyclerview.widget.RecyclerView

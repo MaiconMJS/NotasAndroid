@@ -96,7 +96,7 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
         // VERIFICA SE ALGUM CHECKBOX FOI MARCADO!
         val isAnyNoteSelected = dataList!!.any { nota -> nota.removeNote }
         if (isAnyNoteSelected) {
-            val dialogBuilder = AlertDialog.Builder(this)
+            val dialogBuilder = AlertDialog.Builder(this, R.style.RoundedDialog)
             dialogBuilder.setMessage(getString(R.string.tem_certeza))
                 .setCancelable(false)
                 .setPositiveButton(getString(R.string.sim)) { _, _ ->
@@ -140,9 +140,9 @@ class HomeView : AppCompatActivity(), Home.View, Home.editOnClick {
             alert.show()
             // PERSONALIZANDO A COR DOS BOTÕES PARA AMARELO!
             alert.getButton(AlertDialog.BUTTON_POSITIVE)
-                .setTextColor(getResources().getColor(R.color.yellow))
+                .setTextColor(getResources().getColor(R.color.green))
             alert.getButton(AlertDialog.BUTTON_NEGATIVE)
-                .setTextColor(getResources().getColor(R.color.yellow))
+                .setTextColor(getResources().getColor(R.color.green))
         }
     }
 

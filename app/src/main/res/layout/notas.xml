@@ -5,7 +5,7 @@
     android:layout_height="200dp"
     android:layout_margin="10dp"
     app:cardCornerRadius="16dp"
-    app:cardElevation="7dp">
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,6 +15,7 @@
         <CheckBox
             android:id="@+id/checkbox"
             android:layout_width="wrap_content"
+            android:button="@drawable/custom_checkbox"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

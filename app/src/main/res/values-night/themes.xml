@@ -3,8 +3,8 @@
     <style name="Base.Theme.Notas" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-        <item name="colorAccent">@color/yellow</item>
-        <item name="android:statusBarColor">@color/yellow</item>
-        <item name="android:navigationBarColor">@color/yellow</item>
+        <item name="colorAccent">@color/green</item>
+        <item name="android:statusBarColor">@color/green</item>
+        <item name="android:navigationBarColor">@color/green</item>
     </style>
 </resources>
