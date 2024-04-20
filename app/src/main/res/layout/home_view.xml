@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:fadeScrollbars="false"
-            android:scrollbarSize="3dp"
+            android:scrollbarSize="5dp"
             android:scrollbarThumbVertical="@color/green"
             android:scrollbars="vertical"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
