@@ -51,3 +51,7 @@ Para adicionar uma nova nota:
 
 Este aplicativo foi projetado para facilitar o gerenciamento das suas anotações diárias. Com uma
 interface amigável e processos simples, você pode manter suas informações organizadas e acessíveis.
+
+## Contribuições
+Seus comentários e contribuições são bem-vindos! Se você tem alguma sugestão para melhorar este aplicativo ou deseja reportar um bug, por favor, entre em contato através do e-mail newoverride@gmail.com.
+Agradecemos seu apoio para melhorar continuamente nossa aplicação.
