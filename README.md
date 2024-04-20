@@ -10,7 +10,7 @@ criar, salvar e gerenciar suas notas de maneira simples e intuitiva.
 Para adicionar uma nova nota:
 
 1. Pressione o botão com o símbolo “+” na tela principal.
-2. <img src="tela_inicial.jpg" width="300" height="600">
+2. <img src="tela_inicial.jpg" width="250" height="500">
 2. Você será direcionado para a página de criação de nota.
 3. <img src="adicione_uma_nota.jpg" width="300" height="600">
 3. Insira um título no campo “Insira o título aqui”.
@@ -47,8 +47,21 @@ Para adicionar uma nova nota:
   cancelar.
 - <img src="confirmar_delete.jpg" width="300" height="600">
 
-## Conclusão
+## Compartilhamento de Notas
 
+### Enviar Notas por WhatsApp
+- Você pode compartilhar o conteúdo de suas notas diretamente via WhatsApp.
+- Para isso, selecione a nota desejada e utilize a opção de compartilhamento para enviar a descrição da nota para seus contatos no WhatsApp.
+- <img src="compartilhar_notas.jpg" width="300" height="600">
+
+Certifique-se de ter o aplicativo do WhatsApp instalado em seu dispositivo para utilizar essa funcionalidade.
+
+## Contribuições
+Seus comentários e contribuições são bem-vindos! Se você tem alguma sugestão para melhorar este aplicativo ou deseja reportar um bug, por favor, entre em contato através do e-mail newoverride@gmail.com.
+Agradecemos seu apoio para melhorar continuamente nossa aplicação.
+
+
+## Conclusão
 Este aplicativo foi projetado para facilitar o gerenciamento das suas anotações diárias. Com uma
 interface amigável e processos simples, você pode manter suas informações organizadas e acessíveis.
 
