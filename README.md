@@ -1,4 +1,4 @@
-# README - Guia de Uso do Aplicativo de Notas
+# Guia de Uso do Aplicativo de Notas
 
 ## Introdução
 
