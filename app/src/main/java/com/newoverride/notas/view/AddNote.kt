@@ -32,6 +32,7 @@ class AddNote : AppCompatActivity() {
             btnAdicionarNota.setOnClickListener {
                 salvaNotaOuAtualiza(index)
             }
+            // COMPARTILHA DESCRIÇÃO POR WHATSAPP!
             btnWhats.setOnClickListener {
                 val descricao = HomeView.dataList!![index].descricao
                 val sendIntent = Intent().apply {
@@ -97,6 +98,7 @@ class AddNote : AppCompatActivity() {
         finish()
     }
 
+    // ATUALIZA NOTAS SALVAS OU ATUALIZADAS!
     private fun atualizarListaDeNotas(dao: NoteDao) {
         val listAll = dao.getAll().reversed()
         HomeView.dataList!!.clear()
