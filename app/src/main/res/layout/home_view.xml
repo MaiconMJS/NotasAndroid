@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="70dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="@null"
+                        android:contentDescription="@string/btn_add"
                         android:src="@drawable/outline_add_circle_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -75,7 +75,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="@null"
+                        android:contentDescription="@string/btn_lixeira"
                         android:src="@drawable/baseline_delete_sweep_24"
                         app:layout_constraintBottom_toBottomOf="@+id/txt_info_notes"
                         app:layout_constraintEnd_toEndOf="parent"

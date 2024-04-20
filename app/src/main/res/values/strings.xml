@@ -10,4 +10,6 @@
     <string name="tem_certeza">Toda nota selecionada será Excluída?</string>
     <string name="exclusao_concluida">Exclusão concluída!</string>
     <string name="nao">Não</string>
+    <string name="btn_add">Botão para adicionar uma nota</string>
+    <string name="btn_lixeira">Botão para excluir notas</string>
 </resources>
