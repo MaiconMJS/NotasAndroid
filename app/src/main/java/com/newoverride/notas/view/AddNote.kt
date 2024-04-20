@@ -38,8 +38,9 @@ class AddNote : AppCompatActivity() {
                 if (descricao.isNotEmpty()) {
                     val sendIntent = Intent().apply {
                         action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_TEXT, descricao)
                         type = "text/plain"
+                        setPackage("com.whatsapp")
+                        putExtra(Intent.EXTRA_TEXT, descricao)
                     }
                     val shareIntent = Intent.createChooser(sendIntent, null)
                     startActivity(shareIntent)
