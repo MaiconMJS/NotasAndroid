@@ -3,8 +3,11 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/amaranth</item>
         <item>@font/antic_didone</item>
+        <item>@font/arbutus</item>
         <item>@font/architects_daughter</item>
+        <item>@font/archivo_black</item>
         <item>@font/average</item>
+        <item>@font/beth_ellen</item>
         <item>@font/cutive</item>
     </array>
 </resources>
