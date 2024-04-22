@@ -32,7 +32,7 @@ class AddNoteView : AppCompatActivity(), AddNote.View {
         // PASSANDO PARA O PRESENTER O ÍNDICE E A LISTA!
         presenter!!.dataAnalist(index, HomeView.dataList!!)
 
-        // ESCUTANDO BOTÃO VOLTAR E SALVANDO UM NOTA NOVA SE NÃO FOR VAZIO && EDITANDO NOTAS EXISTENTES!
+        // ESCUTANDO BOTÃO VOLTAR E SALVANDO UMA NOTA NOVA SE NÃO FOR VAZIA && EDITANDO NOTAS EXISTENTES!
         with(binding!!) {
             btnAdicionarNota.setOnClickListener {
                 presenter!!.salvaNotaOuAtualiza(

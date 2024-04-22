@@ -76,7 +76,7 @@ class HomePresenter(
         }.start()
     }
 
-    // REMOVE A NOTA SELECIONADA AO PRESSIONAR A LIXEIRA!
+    // REMOVE TODAS AS NOTA SELECIONADA AO PRESSIONAR A LIXEIRA!
     override fun removeNote(context: Context, binding: TextView) {
         // VERIFICA SE ALGUM CHECKBOX FOI MARCADO!
         val isAnyNoteSelected = HomeView.dataList!!.any { nota -> nota.removeNote }
