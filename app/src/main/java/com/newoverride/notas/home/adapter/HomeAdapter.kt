@@ -1,5 +1,7 @@
 package com.newoverride.notas.home.adapter
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
@@ -24,14 +26,15 @@ class HomeAdapter(
         fun bind(nota: Nota) {
             binding.txtCardTitulo.text = nota.titulo
             binding.txtCardDescricao.text = nota.descricao
-            binding.checkbox.visibility = if (nota.ativoCheckBox) View.VISIBLE else View.GONE
             binding.checkbox.isChecked = nota.removeNote
             binding.dataInfo.text = nota.data
             binding.horaInfo.text = nota.hora
 
             // FAZ UMA ANIMAÇÃO NO CHECKBOX SE FOR VISÍVEL!
-            val animate = false
-            if (animate) {
+            val wasVisible = binding.checkbox.visibility == View.VISIBLE
+            binding.checkbox.visibility = if (nota.ativoCheckBox) View.VISIBLE else View.GONE
+            val isVisible = binding.checkbox.visibility == View.VISIBLE
+            if (isVisible && !wasVisible) {
                 val checkBox = binding.checkbox
                 checkBox.translationX = -200f // COMEÇA FORA DA TELA PARA A ESQUERDA!
                 val slideInAnimator = ObjectAnimator.ofFloat(checkBox, "translationX", -200f, 0f)
@@ -43,6 +46,11 @@ class HomeAdapter(
                     val slideOutAnimator =
                         ObjectAnimator.ofFloat(checkBox, "translationX", 0f, 200f)
                     slideOutAnimator.duration = 300
+                    slideOutAnimator.addListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator) {
+                            binding.checkbox.visibility = View.GONE
+                        }
+                    })
                     slideOutAnimator.start()
                 }
             }
