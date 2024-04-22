@@ -1,4 +1,4 @@
-package com.newoverride.notas.model
+package com.newoverride.notas.home.model
 
 data class Nota(
     val id: Int? = null,

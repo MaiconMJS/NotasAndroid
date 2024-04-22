@@ -1,11 +1,16 @@
 package com.newoverride.notas
 
-import com.newoverride.notas.model.Nota
+import android.content.Context
+import android.widget.TextView
+import com.newoverride.notas.home.model.Nota
 
 interface Home {
 
     interface Presenter {
         fun data(displayView: MutableList<Nota>)
+        fun verificaSeHaNotasSelecionadas()
+        fun buscaNoBancoPassaParaDataList(context: Context)
+        fun removeNote(context: Context, binding: TextView)
     }
 
     interface View {
@@ -24,7 +29,7 @@ interface Home {
         fun onFailure(msg: String)
     }
 
-    interface editOnClick {
+    interface EditOnClick {
         fun onClickEdit(position: Int)
     }
 }

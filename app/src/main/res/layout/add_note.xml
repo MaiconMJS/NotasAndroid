@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.AddNote">
+    tools:context=".addnote.view.AddNoteView">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_add_note"
@@ -96,9 +96,9 @@
 
     <ImageButton
         android:id="@+id/btn_whats"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_margin="32dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
