@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@color/green"
-                app:layout_scrollFlags="scroll|enterAlways">
+                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -113,7 +113,7 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/white"
             android:fadeScrollbars="false"
             android:scrollbarSize="5dp"
@@ -124,7 +124,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
 
         </androidx.core.widget.NestedScrollView>
 
